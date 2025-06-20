@@ -9,7 +9,7 @@ description = "Comprehensive documentation for Dito - A high-performance, extens
 default-theme = "light"
 site-url = "https://ditoproxy.com/"
 
-git-repository-url = "https://github.com/dito-project/docs"
+git-repository-url = "https://github.com/andrearaponi/dito"
 git-repository-icon = "fa-github"
 
 [output.html.head]

@@ -192,7 +192,7 @@ Found an issue with the documentation? Please help us improve:
 
 ## 🔗 Related Resources
 
-- **[Main Dito Repository](https://github.com/dito-project/dito)** - Source code and releases
+- **[Main Dito Repository](https://github.com/andrearaponi/dito)** - Source code and releases
 - **[mdBook Guide](https://rust-lang.github.io/mdBook/)** - Learn more about mdBook
 - **[Markdown Guide](https://www.markdownguide.org/)** - Markdown syntax reference
 
