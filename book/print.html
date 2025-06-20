@@ -1,0 +1,590 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Dito Documentation</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Comprehensive documentation for Dito - A high-performance, extensible reverse proxy server written in Go">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Dito Documentation</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/dito-project/docs" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <style>
+#intro-logo { width: 50%; max-width: 300px; }
+.star-container { display: flex; justify-content: center; padding: 1rem 0; }
+.badges { display: flex; justify-content: center; gap: 0.5rem; padding: 1rem; }
+</style>
+<div class="badges">
+  <img src="https://img.shields.io/badge/status-active-green.svg" alt="Status">
+  <img src="https://img.shields.io/badge/release-0.7.5-green.svg" alt="Release">
+  <img src="https://img.shields.io/badge/license-Apache2-blue.svg" alt="License">
+  <img src="https://img.shields.io/badge/language-Go-blue.svg" alt="Language">
+</div>
+<div class="logo-container" align="center">
+  <img id="intro-logo" src="./dito.png" alt="Dito Logo" />
+</div>
+<p><strong>Dito</strong> is an advanced, highly extensible <strong>reverse proxy server</strong> written in Go. It features a robust <strong>plugin-based architecture</strong>, <strong>custom certificate handling</strong> for backend connections, <strong>dynamic configuration reloading</strong>, and more.
+Plugins can manage their own dependencies and provide custom middleware functionality.</p>
+<p>The official project repository is available on <a href="https://github.com/andrearaponi/dito">GitHub</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="features"><a class="header" href="#features">Features</a></h1>
+<ul>
+<li><strong>Layer 7 Reverse Proxy:</strong> Handles HTTP and HTTPS requests efficiently.</li>
+<li><strong>WebSockets Support:</strong> Proxy WebSocket connections with ease.</li>
+<li><strong>Dynamic Configuration Reloading:</strong> Update configurations without restarting the server.</li>
+<li><strong>Extensible Plugin System:</strong> Enhance Dito with custom Go plugins for authentication, caching, rate limiting, request/response transformation, custom logging and more.</li>
+<li><strong>Plugin Security:</strong> Plugins are signed with Ed25519 keys and verified at startup.</li>
+<li><strong>Custom TLS Certificate Management:</strong> Support for mTLS and custom certificates for backend connections.</li>
+<li><strong>Header Manipulation:</strong> Add or remove HTTP headers as needed.</li>
+<li><strong>Advanced Logging:</strong> Asynchronous logging with customizable verbosity and performance optimizations.</li>
+<li><strong>Custom Transport Configuration:</strong> Fine-tune HTTP transport settings per location or globally.</li>
+<li><strong>Response Body Size Limits:</strong> Control maximum response body sizes globally and per location with proper error handling.</li>
+<li><strong>Response Buffering Control:</strong> Enable or disable response buffering per location for optimal performance.</li>
+<li><strong>Prometheus Metrics:</strong> Monitor performance and behavior with detailed metrics.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="project-structure"><a class="header" href="#project-structure">Project Structure</a></h1>
+<pre><code class="language-text">dito/
+├── cmd/                   # Entry points (main application &amp; plugin-signer)
+├── app/                   # Core application logic
+├── config/                # Configuration loader &amp; hot-reload
+├── handlers/              # Request routing &amp; proxy handlers
+├── middlewares/           # Built-in middlewares (plugins can add more)
+├── plugin/                # Plugin loading, signing, and verification
+├── plugins/               # Plugin implementations
+├── transport/             # HTTP transport configuration
+├── websocket/             # WebSocket proxy support
+├── writer/                # Response writers and buffering
+├── metrics/               # Prometheus metrics
+├── logging/               # Structured logging
+├── deployments/           # Deployment configurations
+│   ├── kubernetes/        # Basic Kubernetes deployments
+│   ├── openshift/         # OpenShift production deployments
+│   └── docker/            # Docker Compose for development
+├── configs/               # Configuration files and templates
+│   └── templates/         # Configuration templates
+├── scripts/               # Deployment and utility scripts
+├── bin/                   # Built binaries and runtime files
+├── plugins/               # Example and community plugins
+├── transport/             # HTTP transport customization
+├── websockets/            # WebSocket support
+├── writer/                # Custom response writers
+├── logging/               # Logging utilities
+└── metrics/               # Prometheus metrics collection
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<p>Ensure you have <strong>Go 1.21+</strong> and <code>make</code> installed.</p>
+<h2 id="quick-start"><a class="header" href="#quick-start">Quick Start</a></h2>
+<pre><code class="language-bash"># Clone repo
+git clone https://github.com/andrearaponi/dito.git &amp;&amp; cd dito
+
+# One-command setup &amp; start
+make quick-start
+</code></pre>
+<p>This will build binaries, generate keys, sign plugins, update configuration and start the server.</p>
+<h2 id="step-by-step"><a class="header" href="#step-by-step">Step-by-Step</a></h2>
+<pre><code class="language-bash"># 1. Clone repo
+git clone https://github.com/andrearaponi/dito.git &amp;&amp; cd dito
+
+# 2. Setup (build, keys, plugins, config)
+make setup
+
+# 3. Start server
+make run
+</code></pre>
+<h2 id="makefile-commands"><a class="header" href="#makefile-commands">Makefile Commands</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Category</th><th>Command</th><th>Description</th></tr></thead><tbody>
+<tr><td><strong>Quick</strong></td><td><code>quick-start</code></td><td>Clean, setup everything and start</td></tr>
+<tr><td></td><td><code>setup</code></td><td>Full development setup (build, keys, plugins, config)</td></tr>
+<tr><td></td><td><code>setup-prod</code></td><td>Full production setup (persistent keys, prod config)</td></tr>
+<tr><td></td><td><code>run</code></td><td>Start the Dito server</td></tr>
+<tr><td></td><td><code>fix-config</code></td><td>Quick command to fix configuration after setup</td></tr>
+<tr><td><strong>Build</strong></td><td><code>build</code></td><td>Build Dito binary only</td></tr>
+<tr><td></td><td><code>build-plugins</code></td><td>Build all plugins</td></tr>
+<tr><td></td><td><code>build-plugin-signer</code></td><td>Build plugin-signer tool</td></tr>
+<tr><td><strong>Security</strong></td><td><code>generate-keys</code></td><td>Generate Ed25519 key pair for development</td></tr>
+<tr><td></td><td><code>generate-prod-keys</code></td><td>Generate persistent Ed25519 key pair for production</td></tr>
+<tr><td></td><td><code>sign-plugins</code></td><td>Sign all plugins with development keys</td></tr>
+<tr><td></td><td><code>sign-plugins-prod</code></td><td>Sign all plugins with production keys</td></tr>
+<tr><td></td><td><code>update-config</code></td><td>Update bin/config.yaml with development key paths/hashes</td></tr>
+<tr><td></td><td><code>update-prod-config</code></td><td>Update bin/config-prod.yaml with production key paths/hashes</td></tr>
+<tr><td></td><td><code>update-k8s-config</code></td><td>Create configs/config-prod-k8s.yaml for Kubernetes deployment</td></tr>
+<tr><td><strong>OpenShift</strong></td><td><code>deploy-ocp</code></td><td>Complete OpenShift production deployment</td></tr>
+<tr><td></td><td><code>deploy-ocp-dev</code></td><td>Quick development deployment to OpenShift</td></tr>
+<tr><td></td><td><code>status-ocp</code></td><td>Check OpenShift deployment status</td></tr>
+<tr><td></td><td><code>logs-ocp</code></td><td>View OpenShift deployment logs</td></tr>
+<tr><td></td><td><code>clean-ocp</code></td><td>Clean up OpenShift resources</td></tr>
+<tr><td><strong>Debug</strong></td><td><code>debug-config</code></td><td>Debug configuration issues</td></tr>
+<tr><td></td><td><code>help</code></td><td>Show all commands</td></tr>
+<tr><td><strong>Cleanup</strong></td><td><code>clean</code></td><td>Remove build artifacts</td></tr>
+<tr><td></td><td><code>clean-plugins</code></td><td>Clean plugin binaries only</td></tr>
+<tr><td><strong>Development</strong></td><td><code>test</code></td><td>Run tests</td></tr>
+<tr><td></td><td><code>vet</code></td><td>Run go vet</td></tr>
+<tr><td></td><td><code>fmt</code></td><td>Format code</td></tr>
+<tr><td></td><td><code>sonar</code></td><td>Run SonarQube analysis</td></tr>
+</tbody></table>
+</div>
+<h2 id="manual-installation"><a class="header" href="#manual-installation">Manual Installation</a></h2>
+<ol>
+<li><strong>Build Dito</strong>
+<pre><code class="language-bash">go build -o bin/dito ./cmd/dito/main.go
+</code></pre>
+</li>
+<li><strong>Build plugin-signer</strong>
+<pre><code class="language-bash">cd cmd/plugin-signer &amp;&amp; go build -o ../../bin/plugin-signer . &amp;&amp; cd ../..
+</code></pre>
+</li>
+<li><strong>Generate keys</strong>
+<pre><code class="language-bash">./bin/plugin-signer generate-keys
+</code></pre>
+</li>
+<li><strong>Build plugins</strong>
+<pre><code class="language-bash">find plugins -mindepth 1 -maxdepth 1 -type d -exec sh -c 'cd "$1" &amp;&amp; go build -buildmode=plugin -o "$(basename "$1").so"' sh {} \;
+</code></pre>
+</li>
+<li><strong>Sign plugins</strong>
+<pre><code class="language-bash">find plugins -name "*.so" -exec ./bin/plugin-signer sign {} \;
+</code></pre>
+</li>
+<li><strong>Update configuration</strong>
+Ensure <code>public_key_path</code> and <code>public_key_hash</code> in <code>config.yaml</code> are correct.</li>
+<li><strong>Run Dito</strong>
+<pre><code class="language-bash">./bin/dito
+</code></pre>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="usage"><a class="header" href="#usage">Usage</a></h1>
+<p>Start the server with the default configuration:</p>
+<pre><code class="language-bash">make run
+</code></pre>
+<p>Or directly:</p>
+<pre><code class="language-bash">./bin/dito -f /path/to/custom-config.yaml -enable-profiler
+</code></pre>
+<h2 id="configuration-file"><a class="header" href="#configuration-file">Configuration File</a></h2>
+<ul>
+<li><strong>Template:</strong> <code>cmd/config.yaml</code></li>
+<li><strong>Runtime:</strong> <code>bin/config.yaml</code></li>
+</ul>
+<p>Example configuration:</p>
+<pre><code class="language-yaml">port: '8081'
+hot_reload: true
+metrics:
+  enabled: true
+  path: "/metrics"
+logging:
+  enabled: true
+  verbose: false
+  level: "info"
+plugins:
+  directory: "./plugins"
+  public_key_path: "./ed25519_public.key"
+  public_key_hash: "&lt;SHA256_HASH&gt;"
+transport:
+  http:
+    idle_conn_timeout: 90s
+    max_idle_conns: 1000
+    max_idle_conns_per_host: 200
+    max_conns_per_host: 0
+    tls_handshake_timeout: 2s
+    response_header_timeout: 2s
+    expect_continue_timeout: 500ms
+    disable_compression: false
+    dial_timeout: 2s
+    keep_alive: 30s
+    force_http2: true
+locations:
+  - path: "^/test-ws$"
+    target_url: "wss://echo.websocket.org"
+    enable_websocket: true
+    replace_path: true
+  - path: "^/dito$"
+    target_url: "https://httpbin.org/get"
+    replace_path: true
+    transport:
+      http:
+        disable_compression: true
+    additional_headers:
+      X-Custom: "true"
+    excluded_headers:
+      - Cookie
+    middlewares:
+      - hello-plugin
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="response-limits"><a class="header" href="#response-limits">Response Limits</a></h1>
+<p>Dito allows configuring maximum response body sizes globally and per location.</p>
+<h2 id="global-limits"><a class="header" href="#global-limits">Global Limits</a></h2>
+<pre><code class="language-yaml">response_limits:
+  max_response_body_size: 100000 # 100KB default limit
+</code></pre>
+<h2 id="per-location-limits"><a class="header" href="#per-location-limits">Per-Location Limits</a></h2>
+<pre><code class="language-yaml">locations:
+  - path: "^/api/small"
+    target_url: "https://api.example.com"
+    max_response_body_size: 1024
+    disable_response_buffering: false
+  - path: "^/api/large"
+    target_url: "https://api.example.com"
+    max_response_body_size: 52428800
+    disable_response_buffering: true
+</code></pre>
+<h3 id="features-1"><a class="header" href="#features-1">Features</a></h3>
+<ul>
+<li>Automatic 413 status code when limits are exceeded</li>
+<li>JSON error responses with details</li>
+<li>Early detection using <code>Content-Length</code></li>
+<li>Works with buffered and streaming responses</li>
+<li>Logging when limits are exceeded</li>
+<li>Limits can be updated via hot reload</li>
+</ul>
+<h3 id="error-format"><a class="header" href="#error-format">Error Format</a></h3>
+<pre><code class="language-json">{
+  "error": {
+    "code": 413,
+    "message": "Response body size exceeds limit",
+    "details": {
+      "limit_bytes": 90,
+      "path": "/api/endpoint"
+    }
+  }
+}
+</code></pre>
+<h3 id="buffering-control"><a class="header" href="#buffering-control">Buffering Control</a></h3>
+<ul>
+<li><code>false</code> (default): responses buffered in memory</li>
+<li><code>true</code>: responses streamed directly to the client</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="plugin-system"><a class="header" href="#plugin-system">Plugin System</a></h1>
+<p>Dito uses Go plugins (<code>.so</code> files). Each plugin should be placed in its own subdirectory under <code>plugins/</code> and typically contains the compiled plugin (<code>&lt;name&gt;.so</code>), a signature file and an optional <code>config.yaml</code>.</p>
+<h2 id="signing--verification"><a class="header" href="#signing--verification">Signing &amp; Verification</a></h2>
+<p>Plugin signing is mandatory and uses Ed25519 keys.</p>
+<ol>
+<li><strong>Generate key pair</strong>
+<pre><code class="language-bash">./bin/plugin-signer generate-keys -privateKey ed25519_private.key -publicKey ed25519_public.key
+</code></pre>
+</li>
+<li><strong>Compute public key hash</strong>
+<pre><code class="language-bash">shasum -a 256 ed25519_public.key | awk '{print $1}'
+</code></pre>
+</li>
+<li><strong>Update <code>config.yaml</code></strong> with the <code>public_key_path</code> and computed hash.</li>
+<li><strong>Sign plugin</strong>
+<pre><code class="language-bash">./bin/plugin-signer sign -plugin path/to/plugin.so -privateKey path/to/ed25519_private.key
+</code></pre>
+</li>
+</ol>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h2>
+<ul>
+<li><code>public key integrity validation failed</code>: regenerate the hash and update the configuration.</li>
+<li><code>failed to read public key</code>: verify the path and file permissions.</li>
+<li><code>plugin signature verification failed</code>: re-sign with the correct key pair.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="custom-transport-configuration"><a class="header" href="#custom-transport-configuration">Custom Transport Configuration</a></h1>
+<p>Customize how Dito connects to backend services.</p>
+<ul>
+<li><strong>Timeouts and Connection Limits</strong>: adjust to match backend behavior.</li>
+<li><strong>TLS Settings</strong>: manage handshake timeouts and enforce HTTP/2 if needed.</li>
+<li><strong>Custom Certificates</strong>: specify client certificates for mTLS backends.</li>
+</ul>
+<h2 id="websocket-support"><a class="header" href="#websocket-support">WebSocket Support</a></h2>
+<p>Add <code>enable_websocket: true</code> to a location to proxy WebSocket connections.</p>
+<pre><code class="language-yaml">locations:
+  - path: "^/test-ws$"
+    target_url: "wss://echo.websocket.org"
+    enable_websocket: true
+    replace_path: true
+</code></pre>
+<h3 id="upcoming-enhancements"><a class="header" href="#upcoming-enhancements">Upcoming Enhancements</a></h3>
+<p>Future versions will provide enhanced TLS control, improved error handling and detailed metrics for WebSocket traffic.</p>
+<h2 id="tlsssl"><a class="header" href="#tlsssl">TLS/SSL</a></h2>
+<p>Support for mTLS is built in. Specify <code>cert_file</code>, <code>key_file</code> and <code>ca_file</code> to secure backend connections.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="metrics"><a class="header" href="#metrics">Metrics</a></h1>
+<p>Dito exposes Prometheus metrics to monitor performance and behaviour.</p>
+<h2 id="available-metrics"><a class="header" href="#available-metrics">Available Metrics</a></h2>
+<ul>
+<li><code>http_requests_total</code> – total number of HTTP requests processed</li>
+<li><code>http_request_duration_seconds</code> – duration histogram</li>
+<li><code>active_connections</code> – number of active connections</li>
+<li><code>data_transferred_bytes_total</code> – bytes transferred</li>
+<li>Standard Go runtime and promhttp metrics</li>
+</ul>
+<h2 id="configuration"><a class="header" href="#configuration">Configuration</a></h2>
+<p>Enable metrics in <code>config.yaml</code>:</p>
+<pre><code class="language-yaml">metrics:
+   enabled: true
+   path: "/metrics"
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reporting-issues"><a class="header" href="#reporting-issues">Reporting Issues</a></h1>
+<ol>
+<li><strong>Go Version</strong> – include the output of <code>go version</code>.</li>
+<li><strong>Error Details</strong> – provide the error message, steps to reproduce and any logs.</li>
+<li><strong>Configuration File</strong> – attach the <code>config.yaml</code> used when the issue occurred.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contributing"><a class="header" href="#contributing">Contributing</a></h1>
+<ol>
+<li>Fork the repository.</li>
+<li>Create your branch: <code>git checkout -b feature/AmazingFeature</code>.</li>
+<li>Commit your changes.</li>
+<li>Push to the branch.</li>
+<li>Open a pull request.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="containerization--openshift-deployment"><a class="header" href="#containerization--openshift-deployment">Containerization &amp; OpenShift Deployment</a></h1>
+<p>Dito is containerized and optimized for OpenShift.</p>
+<h2 id="quick-deployment"><a class="header" href="#quick-deployment">Quick Deployment</a></h2>
+<pre><code class="language-bash">chmod +x scripts/deploy-ocp.sh
+./scripts/deploy-ocp.sh
+</code></pre>
+<p>Custom namespace and version:</p>
+<pre><code class="language-bash">./scripts/deploy-ocp.sh -n my-dito -v latest
+</code></pre>
+<p>Other options include force key regeneration (<code>-f</code>), configuration only (<code>-c</code>) or deploy only (<code>-d</code>).</p>
+<h2 id="manual-deployment-steps"><a class="header" href="#manual-deployment-steps">Manual Deployment Steps</a></h2>
+<h3 id="1-build-and-push-container-image"><a class="header" href="#1-build-and-push-container-image">1. Build and Push Container Image</a></h3>
+<pre><code class="language-bash">./docker-build.sh
+</code></pre>
+<h3 id="2-generate-production-keys"><a class="header" href="#2-generate-production-keys">2. Generate Production Keys</a></h3>
+<pre><code class="language-bash">make generate-prod-keys
+</code></pre>
+<h3 id="3-create-openshift-resources"><a class="header" href="#3-create-openshift-resources">3. Create OpenShift Resources</a></h3>
+<pre><code class="language-bash">oc new-project dito
+oc create secret generic dito-keys \
+    --from-file=ed25519_public.key=bin/ed25519_public_prod.key \
+    --from-file=ed25519_private.key=bin/ed25519_private_prod.key
+
+HASH=$(shasum -a 256 bin/ed25519_public_prod.key | awk '{print $1}')
+sed "s/PLACEHOLDER_HASH_TO_BE_REPLACED/$HASH/" configs/templates/application.yaml &gt; configs/config-prod-k8s.yaml
+
+oc create configmap dito-config \
+    --from-file=config.yaml=configs/config-prod-k8s.yaml
+</code></pre>
+<h3 id="4-deploy-application"><a class="header" href="#4-deploy-application">4. Deploy Application</a></h3>
+<pre><code class="language-bash">oc apply -f deployments/openshift/production-deployment.yaml
+</code></pre>
+<h3 id="deployment-models"><a class="header" href="#deployment-models">Deployment Models</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>File</th><th>Use Case</th><th>Features</th></tr></thead><tbody>
+<tr><td><code>deployments/kubernetes/basic-deployment.yaml</code></td><td>Basic deployment</td><td>Simple setup</td></tr>
+<tr><td><code>deployments/openshift/production-deployment.yaml</code></td><td>Production deployment</td><td>Plugin signing, proper secrets, health checks</td></tr>
+</tbody></table>
+</div>
+<h3 id="security-features"><a class="header" href="#security-features">Security Features</a></h3>
+<h4 id="container-security"><a class="header" href="#container-security">Container Security</a></h4>
+<ul>
+<li>Non-root execution (user ID 1001)</li>
+<li>Read-only root filesystem</li>
+<li>Dropped capabilities</li>
+<li>OpenShift security contexts</li>
+</ul>
+<h4 id="key-management"><a class="header" href="#key-management">Key Management</a></h4>
+<ul>
+<li>External key generation</li>
+<li>Runtime plugin signing</li>
+<li>Secure secret mounting</li>
+<li>Proper file permissions</li>
+</ul>
+<h3 id="configuration-management"><a class="header" href="#configuration-management">Configuration Management</a></h3>
+<p>Dito supports template-based configs, environment-specific configs and hot reload via ConfigMaps. See <code>configs/README.md</code> for details.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="license"><a class="header" href="#license">License</a></h1>
+<p>This project is licensed under the Apache License 2.0. See the <a href="../LICENSE">LICENSE</a> file for details.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>

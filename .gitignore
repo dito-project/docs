@@ -1,6 +1,3 @@
-# mdBook generated files
-book/
-
 # mdBook build artifacts
 *.tmp
 
