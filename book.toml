@@ -1,0 +1,12 @@
+[book]
+authors = ["Codex"]
+language = "en"
+src = "src"
+title = "Dito Documentation"
+
+[output.html]
+default-theme = "light"
+
+
+git-repository-url = "https://github.com/andrearaponi/dito"
+git-repository-icon = "fa-github"
