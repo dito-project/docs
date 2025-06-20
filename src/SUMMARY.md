@@ -1,6 +1,7 @@
 # Summary
 
-- [Introduction](./introduction.md)
+[Dito - An Advanced Reverse Proxy](./README.md)
+
 - [Features](./features.md)
 - [Project Structure](./project-structure.md)
 - [Installation](./installation.md)

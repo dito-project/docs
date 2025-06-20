@@ -15,9 +15,6 @@
   <img id="intro-logo" src="./dito.png" alt="Dito Logo" />
 </div>
 
-
-
-**Dito** is an advanced, highly extensible **reverse proxy server** written in Go. It features a robust **plugin-based architecture**, **custom certificate handling** for backend connections, **dynamic configuration reloading**, and more. 
-Plugins can manage their own dependencies and provide custom middleware functionality.
+**Dito** is an advanced, highly extensible **reverse proxy server** written in Go. It features a robust **plugin-based architecture**, **custom certificate handling** for backend connections, **dynamic configuration reloading**, and more. Plugins can manage their own dependencies and provide custom middleware functionality.
 
 The official project repository is available on [GitHub](https://github.com/andrearaponi/dito).
