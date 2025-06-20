@@ -78,6 +78,28 @@ mdbook serve --open
 
 The built documentation will be available in the `book/` directory.
 
+## 🚀 Deployment
+
+The documentation is built locally and deployed to Cloudflare Pages:
+
+1. **Build locally**: `mdbook build`
+2. **Commit the book/ directory**: The built HTML files are committed to the repository
+3. **Cloudflare Pages**: Automatically serves the `book/` directory as a static site
+
+### Deployment Workflow
+
+```bash
+# Make your changes to src/ files
+mdbook build
+git add book/
+git commit -m "Update documentation"
+git push origin main
+```
+
+Cloudflare Pages is configured to serve the `book/` directory directly, making deployment simple and fast.
+
+**Note**: The `book/` directory contains the built HTML files and is intentionally committed to the repository for Cloudflare Pages deployment.
+
 ## 🌐 Live Documentation
 
 The documentation is automatically built and deployed. You can access it at:
