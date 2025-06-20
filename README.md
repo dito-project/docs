@@ -88,7 +88,7 @@ The documentation is automatically built and deployed. You can access it at:
 ## 📁 Repository Structure
 
 ```
-dito-docs/
+docs/
 ├── README.md              # This file - Documentation overview
 ├── LICENSE                # Apache License 2.0
 ├── .gitignore            # Git ignore rules
@@ -125,8 +125,8 @@ We welcome contributions to improve the documentation! Here's how you can help:
 
 1. **Fork this repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/dito-docs.git
-   cd dito-docs
+   git clone https://github.com/YOUR_USERNAME/docs.git
+   cd docs
    ```
 
 2. **Make your changes**
@@ -160,7 +160,7 @@ We welcome contributions to improve the documentation! Here's how you can help:
 
 Found an issue with the documentation? Please help us improve:
 
-1. **Check existing issues** - Search [GitHub Issues](https://github.com/andrearaponi/dito-docs/issues)
+1. **Check existing issues** - Search [GitHub Issues](https://github.com/dito-project/docs/issues)
 2. **Create a new issue** - Use our issue template
 3. **Provide details**:
    - Which page/section has the issue
@@ -170,7 +170,7 @@ Found an issue with the documentation? Please help us improve:
 
 ## 🔗 Related Resources
 
-- **[Main Dito Repository](https://github.com/andrearaponi/dito)** - Source code and releases
+- **[Main Dito Repository](https://github.com/dito-project/dito)** - Source code and releases
 - **[mdBook Guide](https://rust-lang.github.io/mdBook/)** - Learn more about mdBook
 - **[Markdown Guide](https://www.markdownguide.org/)** - Markdown syntax reference
 
@@ -180,12 +180,4 @@ This documentation is licensed under the same terms as the Dito project - Apache
 
 ---
 
-<div align="center">
-  <p><strong>📚 Happy Reading! 📚</strong></p>
-  <p>
-    <a href="https://github.com/andrearaponi/dito">⭐ Star Dito on GitHub</a> •
-    <a href="https://github.com/andrearaponi/dito-docs/issues">🐛 Report Doc Issues</a> •
-    <a href="book/src/contributing.md">🤝 Contribute</a>
-  </p>
-</div>
 
