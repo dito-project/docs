@@ -3,10 +3,32 @@ authors = ["Codex"]
 language = "en"
 src = "src"
 title = "Dito Documentation"
+description = "Comprehensive documentation for Dito - A high-performance, extensible reverse proxy server written in Go"
 
 [output.html]
 default-theme = "light"
+site-url = "https://ditoproxy.com/"
 
-
-git-repository-url = "https://github.com/andrearaponi/dito"
+git-repository-url = "https://github.com/dito-project/docs"
 git-repository-icon = "fa-github"
+
+[output.html.head]
+additional-css = []
+additional-js = []
+
+# Meta tags per OpenGraph e SEO
+head-content = '''
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="shortcut icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta property="og:title" content="Dito - An Advanced Reverse Proxy">
+<meta property="og:description" content="Comprehensive documentation for Dito - A high-performance, extensible reverse proxy server written in Go">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ditoproxy.com/">
+<meta property="og:image" content="https://ditoproxy.com/dito.png">
+<meta name="description" content="Comprehensive documentation for Dito - A high-performance, extensible reverse proxy server written in Go">
+<meta name="keywords" content="dito, reverse proxy, go, golang, documentation, high-performance, server">
+<meta name="author" content="Dito Project">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#663399">
+'''
