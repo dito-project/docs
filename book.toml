@@ -2,7 +2,7 @@
 authors = ["Codex"]
 language = "en"
 src = "src"
-title = "Dito Documentation"
+title = "Dito - An Advanced Reverse Proxy"
 description = "Comprehensive documentation for Dito - A high-performance, extensible reverse proxy server written in Go"
 
 [output.html]
