@@ -172,7 +172,25 @@
                         <style>
 #intro-logo { width: 50%; max-width: 300px; }
 .star-container { display: flex; justify-content: center; padding: 1rem 0; }
-.badges { display: flex; justify-content: center; gap: 0.5rem; padding: 1rem; }
+.badges { 
+  display: flex; 
+  justify-content: center; 
+  gap: 0.5rem; 
+  padding: 1rem; 
+  flex-wrap: wrap;
+  margin: 0 1rem;
+}
+@media (max-width: 768px) {
+  .badges {
+    gap: 0.3rem;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+  }
+  .badges img {
+    max-width: calc(50% - 0.15rem);
+    height: auto;
+  }
+}
 </style>
 <div class="badges">
   <img src="https://img.shields.io/badge/status-active-green.svg" alt="Status">
